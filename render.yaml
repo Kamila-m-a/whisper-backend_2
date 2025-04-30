@@ -1,0 +1,20 @@
+services:
+  - type: web
+    name: whisper-backend
+    plan: free
+    runtime: python
+    # swapSizeMB: 512  # Remove this (Render free tier ignores swap)
+
+    buildCommand: |
+      pip install --upgrade pip
+      pip install numpy==1.23.5 --prefer-binary
+      pip install -r requirements.txt
+
+    startCommand: |
+      uvicorn main:app --host 0.0.0.0 --port $PORT --workers 1 --timeout-keep-alive 300
+
+    envVars:
+      - key: PYTORCH_ENABLE_MPS_FALLBACK
+        value: "1"
+      - key: PYTORCH_NO_CUDA
+        value: "1"  # Disables CUDA (saves memory)
