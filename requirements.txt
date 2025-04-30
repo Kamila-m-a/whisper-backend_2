@@ -1,0 +1,6 @@
+fastapi>=0.95.0
+uvicorn>=0.21.0
+whisper-ctranslate2>=0.1.0  
+torch>=2.0.0
+numpy>=1.23.5
+librosa>=0.10.0  # For duration checking
